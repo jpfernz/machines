@@ -38,6 +38,22 @@ paths:
         500:
           $ref: '#/components/responses/500ApiError'
   /api/v1/machines/{id}:
+    delete:
+      summary: Delete a machine
+      operationId: deleteMachine
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the machine to delete
+          schema:
+            type: integer
+            format: int64
+      responses:
+        204:
+          description: Machine deleted
+        500:
+          $ref: '#/components/responses/500ApiError'
     put:
       summary: Update a machine
       operationId: updateMachine
