@@ -1,0 +1,114 @@
+openapi: "3.0.0"
+info:
+  title: Machines API
+  version: 1.0.0
+
+paths:
+  /api/v1/machines:
+    get:
+      summary: List of all machines
+      operationId: getMachines
+      responses:
+        200:
+          description: Retrieve all machines
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MachineDTO'
+        500:
+          $ref: '#/components/responses/500ApiError'
+    post:
+      summary: Add a new machine
+      operationId: addMachine
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MachineDTO'
+      responses:
+        201:
+          description: Machine created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineDTO'
+        500:
+          $ref: '#/components/responses/500ApiError'
+  /api/v1/machines/{id}:
+    put:
+      summary: Update a machine
+      operationId: updateMachine
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the machine to update
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Machine updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineDTO'
+        500:
+          $ref: '#/components/responses/500ApiError'
+    get:
+      summary: Get a machine by ID
+      operationId: getMachineById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the machine to retrieve
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Retrieve a machine by ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineDTO'
+        500:
+          $ref: '#/components/responses/500ApiError'
+
+components:
+  schemas:
+    MachineDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        projectId:
+          type: integer
+          format: int64
+        machineStatus:
+          type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - MAINTENANCE
+  responses:
+    500ApiError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int32
+              message:
+                type: string
+                example: "Unexpected server error"
