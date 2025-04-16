@@ -9,7 +9,8 @@ spring:
       name: user
       password: password
   datasource:
-    url: jdbc:postgresql://localhost:5432/worksite-db
+    url: jdbc:postgresql://worksite-db:5432/worksite-db # dockerized
+    # url: jdbc:postgresql://localhost:5432/worksite-db # Uncomment this line if you want to use the local database
     username: worksite-user
     password: worksite-pass
     driver-class-name: org.postgresql.Driver

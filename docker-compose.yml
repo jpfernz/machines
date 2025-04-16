@@ -1,0 +1,20 @@
+name: "Worksite Machines"
+
+services:
+  machines-app:
+    container_name: machines-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://worksite-db:5432/worksite-db
+      - SPRING_DATASOURCE_USERNAME=worksite-user
+      - SPRING_DATASOURCE_PASSWORD=worksite-pass
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+networks:
+  default:
+    name: worksite_network
