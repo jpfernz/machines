@@ -3,6 +3,7 @@ package dev.worksite.machines.config
 import dev.worksite.machines.controller.MachinesController
 import dev.worksite.machines.repository.MachinesRepository
 import dev.worksite.machines.service.MachinesService
+import dev.worksite.machines.service.impl.MachinesServiceImpl
 import org.modelmapper.ModelMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
@@ -25,7 +26,7 @@ class MachinesTestConfig {
 
     @Bean
     MachinesService machinesService(MachinesRepository machinesRepository) {
-        return detachedMockFactory.Stub(MachinesService)
+        return new MachinesServiceImpl(machinesRepository)
     }
 
     @Bean
