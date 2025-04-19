@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8082:8082"
-    restart: always
+    restart: no
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://worksite-db:5432/worksite-db
       - SPRING_DATASOURCE_USERNAME=worksite-user
@@ -18,3 +18,4 @@ services:
 networks:
   default:
     name: worksite_network
+    external: true
