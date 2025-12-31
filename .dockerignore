@@ -1,0 +1,17 @@
+target/
+.git/
+.gitignore
+.idea/
+*.iml
+.DS_Store
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+mvnw
+mvnw.cmd
+
+# logs
+*.log
+
+# compose override/env
+.env
+

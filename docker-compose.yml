@@ -1,0 +1,27 @@
+name: worksite-machines
+
+services:
+  machines:
+    build:
+      context: .
+    container_name: worksite-machines
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env.docker
+    environment:
+      # Spring expects these exact keys (per application.yml placeholders):
+      jwk.set.uri: ${JWK_SET_URI}
+      db.url: ${DB_URL}
+      db.username: ${DB_USERNAME}
+      db.password: ${DB_PASSWORD}
+
+      # Optional
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-}
+    networks:
+      - worksite_network
+
+networks:
+  worksite_network:
+    external: true
+    name: worksite_network
